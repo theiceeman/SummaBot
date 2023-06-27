@@ -3,5 +3,11 @@ import { createApi, fetchBaseQuery } from
 // import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
 
 export const articleApi = createApi({
-    reducerPath: 'articleApi'
+    reducerPath: 'articleApi',
+    endpoints: (builder) => ({
+        getSummary: builder.query({
+            query: (params) => `test`
+        })
+    })
+    
 });
