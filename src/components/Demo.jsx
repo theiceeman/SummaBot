@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { copy, linkIcon, loader, logo, tick } from "../assets";
 import { MdSend } from "react-icons/md";
-import { useLazyGetSummaryQuery } from "../services/article";
+import {
+  useLazyFetchDataQuery,
+  useLazyGetSummaryQuery,
+} from "../services/article";
+// import { useGetSummaryQuery } from "../services/article";
 
 const Demo = () => {
   const [article, setArticle] = useState({
@@ -9,11 +13,16 @@ const Demo = () => {
     summary: "",
   });
 
+  // const [getSummary, { error, isFetching }] = useGetSummaryQuery();
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
+
+  const [fetchData] = useLazyFetchDataQuery();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await getSummary({ articleUrl: article.url });
+
+    // fetchData();return;
+    const { data } = getSummary({ articleUrl: article.url });
 
     if (data?.summary) {
       const newArticle = { ...article, summary: data.summary };
